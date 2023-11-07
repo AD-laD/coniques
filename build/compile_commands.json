@@ -1,0 +1,26 @@
+[
+{
+  "directory": "C:/Users/adfer/Documents/IMAC_WINDOWS/IMAC2/coniques/build",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/conic.dir/includes_CXX.rsp -g -Wall -Wextra -Wpedantic -pedantic-errors -o CMakeFiles\\conic.dir\\src\\main.cpp.obj -c C:\\Users\\adfer\\Documents\\IMAC_WINDOWS\\IMAC2\\coniques\\src\\main.cpp",
+  "file": "C:/Users/adfer/Documents/IMAC_WINDOWS/IMAC2/coniques/src/main.cpp",
+  "output": "CMakeFiles/conic.dir/src/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/adfer/Documents/IMAC_WINDOWS/IMAC2/coniques/build",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/conic.dir/includes_CXX.rsp -g -Wall -Wextra -Wpedantic -pedantic-errors -o CMakeFiles\\conic.dir\\src\\Geogebra_conics.cpp.obj -c C:\\Users\\adfer\\Documents\\IMAC_WINDOWS\\IMAC2\\coniques\\src\\Geogebra_conics.cpp",
+  "file": "C:/Users/adfer/Documents/IMAC_WINDOWS/IMAC2/coniques/src/Geogebra_conics.cpp",
+  "output": "CMakeFiles/conic.dir/src/Geogebra_conics.cpp.obj"
+},
+{
+  "directory": "C:/Users/adfer/Documents/IMAC_WINDOWS/IMAC2/coniques/build",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/conic.dir/includes_CXX.rsp -g -Wall -Wextra -Wpedantic -pedantic-errors -o CMakeFiles\\conic.dir\\src\\Entry.cpp.obj -c C:\\Users\\adfer\\Documents\\IMAC_WINDOWS\\IMAC2\\coniques\\src\\Entry.cpp",
+  "file": "C:/Users/adfer/Documents/IMAC_WINDOWS/IMAC2/coniques/src/Entry.cpp",
+  "output": "CMakeFiles/conic.dir/src/Entry.cpp.obj"
+},
+{
+  "directory": "C:/Users/adfer/Documents/IMAC_WINDOWS/IMAC2/coniques/build",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/conic.dir/includes_CXX.rsp -g -Wall -Wextra -Wpedantic -pedantic-errors -o CMakeFiles\\conic.dir\\src\\Directory.cpp.obj -c C:\\Users\\adfer\\Documents\\IMAC_WINDOWS\\IMAC2\\coniques\\src\\Directory.cpp",
+  "file": "C:/Users/adfer/Documents/IMAC_WINDOWS/IMAC2/coniques/src/Directory.cpp",
+  "output": "CMakeFiles/conic.dir/src/Directory.cpp.obj"
+}
+]

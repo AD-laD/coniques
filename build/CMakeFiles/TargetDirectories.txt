@@ -1,0 +1,3 @@
+C:/Users/adfer/Documents/IMAC_WINDOWS/IMAC2/coniques/build/CMakeFiles/conic.dir
+C:/Users/adfer/Documents/IMAC_WINDOWS/IMAC2/coniques/build/CMakeFiles/edit_cache.dir
+C:/Users/adfer/Documents/IMAC_WINDOWS/IMAC2/coniques/build/CMakeFiles/rebuild_cache.dir
