@@ -4,6 +4,7 @@
 // #include <Eigen/Dense>
 #include <C:\eigen-3.4.0\Eigen\Dense>
 #include "Geogebra_conics.hpp"
+#include "point.hpp"
 
 
 
@@ -29,6 +30,13 @@ int main()
   viewer.push_point(pt1, "p1", 200,0,0);
   viewer.push_point(pt2, "p2", 200,0,0);
   viewer.push_point(pt3, 200,0,0);
+
+  //tests class point
+  Point a;
+  std::cout << a.x() << std::endl;
+  Point b=a;
+  // Point result = Point::prod_vect(a, b);
+
 
   // draw line
   viewer.push_line(pt1, pt2-pt1,  200,200,0);

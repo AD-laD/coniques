@@ -11,20 +11,15 @@ class Point {
         int m_w;
     
     public :
-        Point(const double &x=0, const double &y=0, const double &w=1); // default constructor
-        Point(const Point &p); // A FAIRE copy constructor
+        Point(const double &x=0, const double &y=0, const double &w=1); // default constructor : si on ne spécifie pas les paramètres, elles sont remplacées par les valeurs par defaut
+        Point(const Point &p); // copy constructor
 
-        ~Point() = default; //destrucor
+        ~Point() = default; //destructor
 
-        Point prod_vect(Point& a, Point& b); // A FAIRE
-        double x(); // A FAIRE pour y et w
+        Point prod_vect(Point& a, Point& b); // produit vectoriel
+        double x(); // getter de x
+        double y(); //getter de y
+        double w(); //getter de w
+        //faire des setters ?
 
 };
-
-// a mettre dans un point.cpp plus tard
-
-Point::Point( const double &x, const double &y, const double &w) : m_x(x),m_y(y),m_w(w){}
-
-Point::Point(const Point &p){}
-
-double Point::x(){return m_x;}
