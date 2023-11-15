@@ -1,29 +1,32 @@
 #pragma once
 #include <iostream>
+#include <vector>
+#include "point.hpp"
 
 #include <C:\eigen-3.4.0\Eigen\Dense>
 
-
+template <typename T> // on utilisera surtout des Point
 class Conic {
-    private:
-    double m_a;
-    double m_b;
-    double m_c;
-    double m_d;
-    double m_e;
-    double m_f;
+    private :
+        double m_a, m_b,m_c,m_d,m_e,m_f;
+        std::vector<double> m_coeff[6];
+
+    public : 
+        Conic(std::vector<T> point_vector); //5 points constructor
+        Conic(Conic C0); //copy constructor
+        ~Conic() = default;
+
+        //setter
+        void set_value(int i, double& value);
+        void set_vector(std::vector<double> vect[6]);
+        void set_vector(Eigen::VectorXd vect);
+
+        //getter
+        T a(), b(), c(), d(), e(), f();
+
+        //conic type
+        bool is_cercle();
+        bool is_ellipse();
+        bool is_parabole();
+        bool is_hyperbole();
 };
-
-//5 variables (const double) A B C D E F
-//pour vérifier la formule ax^2 +bxy +cy^2+dx+ey+f = 0
-
-// des fonctions pour chaque type de coniques ?
-//cercle a = c et b =0
-//ellipse b^2 - 4ac <0
-//parabole b^2-4ac = 0
-//hyperbole b^2-4ac > 0
-
-
-//definition des 5 pts de controles
-
-
