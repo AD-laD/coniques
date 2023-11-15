@@ -32,12 +32,17 @@ int main()
   viewer.push_point(pt3, 200,0,0);
 
   //tests class point
-  Point a;
+  Point a(1,1,1);
+  Point b(2,2,1);
   std::cout << a.x() << std::endl;
-  Point b=a;
-  // Point result = Point::prod_vect(a, b);
+  std::cout << b.y() << std::endl;
+  //b=a;
+  Point result = a.prod_vect(b);
+  std::cout<< result.x() << std::endl;
+  std::cout<< result.y() << std::endl;
+  std::cout<< result.w() << std::endl;
 
-
+/*
   // draw line
   viewer.push_line(pt1, pt2-pt1,  200,200,0);
 
@@ -49,6 +54,7 @@ int main()
   // render
   viewer.display(); // on terminal
   viewer.render("output.html");  // generate the output file (to open with your web browser)
+*/
 
   return 0;
 }

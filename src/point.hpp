@@ -16,10 +16,16 @@ class Point {
 
         ~Point() = default; //destructor
 
-        Point prod_vect(Point& a, Point& b); // produit vectoriel
-        double x(); // getter de x
-        double y(); //getter de y
-        double w(); //getter de w
-        //faire des setters ?
+        Point prod_vect(Point& b); // produit vectoriel
+
+        //getters
+        double x();
+        double y();
+        double w();
+        
+        //setters
+        void set_x(double& x);
+        void set_y(double& y);
+        void set_w(double& w);
 
 };
