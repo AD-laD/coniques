@@ -5,7 +5,7 @@
 #include <C:\eigen-3.4.0\Eigen\Dense>
 #include "Geogebra_conics.hpp"
 #include "point.hpp"
-
+#include "draw.hpp"
 
 
 int main()
@@ -22,25 +22,27 @@ int main()
   viewer.show_label(true);
 
   // draw points
-  Eigen::VectorXd pt1(2), pt2(2), pt3(2);
+  /*Eigen::VectorXd pt1(2), pt2(2), pt3(2);
   pt1 <<  1.5,  2.0;
   pt2 <<  3.0,  1.0;
   pt3 << -2.0, -1.0;
 
   viewer.push_point(pt1, "p1", 200,0,0);
   viewer.push_point(pt2, "p2", 200,0,0);
-  viewer.push_point(pt3, 200,0,0);
+  viewer.push_point(pt3, 200,0,0);*/
 
   //tests class point
-  Point a(1,1,1);
+  /*Point a(1,1,1);
   Point b(2,2,1);
   std::cout << a.x() << std::endl;
   std::cout << b.y() << std::endl;
-  //b=a;
   Point result = a.prod_vect(b);
   std::cout<< result.x() << std::endl;
   std::cout<< result.y() << std::endl;
-  std::cout<< result.w() << std::endl;
+  std::cout<< result.w() << std::endl;*/
+
+  // draw
+  draw_1(viewer);
 
 /*
   // draw line
