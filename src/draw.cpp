@@ -5,15 +5,22 @@
 
 
 // faire une fonction draw_conic à qui on donne un std::vector<Point> et qui draw la conic pour alléger les fonctions draw
-void draw_1(Viewer_conic viewer){
+void draw_1(Viewer_conic &viewer){
     // on choisi 5 points de contrôle
     Point p1(5,5,1),p2(-3,2,1),p3(-4,-4,1),p4(1,-2,1),p5(0,1,1);
+    //check : ok
     std::vector<Point> v1{p1,p2,p3,p4,p5};
+    //check : ok
     // on construit la conique
-    Conic C1(v1);
+    Conic C1(v1); //pas ok
+
+    // std::cout <<"test"<<std::endl;    
     // on transmet ses coeff à la conique de geogebra
     Eigen::VectorXd conic1(6);
     conic1 << C1.a(), C1.b(), C1.c(), C1.d(), C1.e(), C1.f();
+    // conic1 << 4,5,7,2,1,7;
+    std::cout << C1.a()<<std::endl;
+
     // on la push
     viewer.push_conic(conic1, 0, 0, 200);
 }
