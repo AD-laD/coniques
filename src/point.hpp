@@ -16,7 +16,7 @@ class Point {
 
         ~Point() = default; //destructor
 
-        Point prod_vect(Point& b); // produit vectoriel
+        Point prod_vect(const Point& b); // produit vectoriel
 
         //getters
         double x();
