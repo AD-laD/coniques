@@ -1,5 +1,7 @@
 #include "draw.hpp"
 #include "Conic.hpp"
+#include "random"
+#include "chrono"
 
 
 // faire une fonction draw_conic à qui on donne un std::vector<Point> et qui draw la conic pour alléger les fonctions draw
@@ -13,11 +15,30 @@ void draw_1(Viewer_conic viewer){
     Eigen::VectorXd conic1(6);
     conic1 << C1.a(), C1.b(), C1.c(), C1.d(), C1.e(), C1.f();
     // on la push
-    viewer.push_conic(conic1, 0,0, 200);
+    viewer.push_conic(conic1, 0, 0, 200);
 }
 
-void draw_2(){
-    // tester de faire une conique avec des points random
+void draw_random(Viewer_conic viewer){ //conique de points random
+
+    // selection de la seed
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::cout << "seed : " << seed << std::endl;
+
+    // selection du générateur random 
+
+    //important : jsp s'il faut mettre la def des pts random dans le draw ou pas a voir ptet faudra faire une fonction à part
+	std::default_random_engine generator(seed);
+	std::uniform_real_distribution<double> uniformRealDistribution(-5,5); //distribution de réels entre -5 et 5
+    std::vector<Point> v2;
+    for(unsigned int i=1; i <6 ; i++){
+        Point p (uniformRealDistribution(generator), uniformRealDistribution(generator), uniformRealDistribution(generator));
+        v2.push_back(p); //ajout de chaque point au vecteur v2
+    }
+    Conic C2(v2);
+    Eigen::VectorXd conic2(6);
+    conic2 << C2.a(), C2.b(), C2.c(), C2.d(), C2.e(), C2.f();
+    viewer.push_conic(conic2, 0, 0, 200);
+
 }
 
 void draw_3(){

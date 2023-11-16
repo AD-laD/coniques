@@ -29,7 +29,7 @@ Conic::Conic(std::vector<Point> point_vector){
 
 //setter
 //template <typename T>
-void Conic::set_value(int i, double& value){
+void Conic::set_value(unsigned int i, double& value){
     m_coeff[i] = value;
 }
 //template <typename T>

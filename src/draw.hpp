@@ -6,3 +6,4 @@
 #include "point.hpp"
 
 void draw_1(Viewer_conic viewer);
+void draw_random(Viewer_conic viewer);
