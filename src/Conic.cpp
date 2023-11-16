@@ -61,7 +61,7 @@ std::vector<T> moindres_carres(std::vector<T> point_vector){
 
 }
 
-//conic type
+// conic type
 template <typename T>
 bool Conic<T>::is_cercle(){return(a()==c() && b()==0());}
 template <typename T>
