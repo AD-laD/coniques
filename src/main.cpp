@@ -45,9 +45,9 @@ int main()
   // viewer.push_line(pt1, pt2-pt1,  200,200,0);
 
   // draw conic
-  Eigen::VectorXd conic(6);
-  conic << -1.4, -0.3, -1, -0.6, 0.0, 0.8;
-  viewer.push_conic(conic, 0,0,200);
+  // Eigen::VectorXd conic(6);
+  // conic << -1.4, -0.3, -1, -0.6, 0.0, 0.8;
+  // viewer.push_conic(conic, 0,0,200);
 
   // draw
   draw_1(viewer);

@@ -18,8 +18,8 @@ class Conic {
 
         //setter
         void set_value(unsigned int i, double& value);
-        void set_vector(std::vector<double> vect);
-        void set_vector(Eigen::VectorXd vect);
+        void set_vector(std::vector<double> &vect);
+        void set_vector(Eigen::VectorXd &vect);
 
         //getter
         double a(), b(), c(), d(), e(), f();

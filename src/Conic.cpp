@@ -10,12 +10,12 @@ void Conic::set_value(unsigned int i, double& value){
     m_coeff[i] = value;
 }
 //template <typename T>
-void Conic::set_vector(std::vector<double> vect){
+void Conic::set_vector(std::vector<double> &vect){
     m_coeff = vect;
 }
 
 //template <typename T>
-void Conic::set_vector(Eigen::VectorXd vect){
+void Conic::set_vector(Eigen::VectorXd &vect){
     for(int i=0;i<6;i++) m_coeff[i] = vect[i];
 }
 
@@ -49,7 +49,11 @@ Conic::Conic(std::vector<Point> point_vector){
     }
     Eigen::JacobiSVD<Eigen::MatrixXd> svd(A, Eigen::ComputeThinU|Eigen::ComputeFullV);
     Eigen::VectorXd x=svd.matrixV().rightCols(1);
-    this->set_vector(x);
+    std::vector<double> coefficients;
+    for (int i = 0; i < x.size(); ++i) {
+        coefficients.push_back(x(i));
+    }
+    set_vector(coefficients);
 
 }
 
