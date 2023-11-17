@@ -51,6 +51,9 @@ int main()
 
   // draw
   draw_1(viewer);
+  draw_random(viewer, 10);
+  draw_random (viewer, 50);
+  draw_types(viewer);
 
   // render
   viewer.display(); // on terminal
