@@ -57,6 +57,8 @@ Conic::Conic(std::vector<Point> point_vector){
 
 }
 
+Conic::Conic() : m_coeff({0,0,0,0,0,0}){}
+
 
 std::vector<Point> moindres_carres(std::vector<Point> point_vector){
 

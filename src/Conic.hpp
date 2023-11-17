@@ -14,6 +14,7 @@ class Conic {
     public : 
         Conic(std::vector<Point> point_vector); //5 points constructor
         //Conic(Conic C0); //copy constructor
+        Conic(); // default constructor
         ~Conic() = default;
 
         //setter
