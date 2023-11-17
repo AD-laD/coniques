@@ -5,14 +5,9 @@
 
 
 // faire une fonction draw_conic à qui on donne un std::vector<Point> et qui draw la conic pour alléger les fonctions draw
-void draw_1(Viewer_conic &viewer){
-    // on choisi 5 points de contrôle
-    Point p1(5.0,5.0,1.0),p2(-3.0,2.0,1.0),p3(-4.0,-4.0,1.0),p4(1.0,-2.0,1.0),p5(0.0,1.0,1.0);
-    //check : ok
-    std::vector<Point> v1{p1,p2,p3,p4,p5};
-    //check : ok
-    // on construit la conique
-    Conic C1(v1); //pas ok
+void draw_conic(std::vector<Point> vector, unsigned int n, Viewer_conic &viewer){
+
+    Conic C1(vector); //pas ok
 
     // std::cout <<"test"<<std::endl;    
     // on transmet ses coeff à la conique de geogebra
@@ -23,6 +18,27 @@ void draw_1(Viewer_conic &viewer){
 
     // on la push
     viewer.push_conic(conic1, 0, 0, 200);
+}
+
+void draw_1(Viewer_conic &viewer){
+    // on choisi 5 points de contrôle
+    Point p1(5.0,5.0,1.0),p2(-3.0,2.0,1.0),p3(-4.0,-4.0,1.0),p4(1.0,-2.0,1.0),p5(0.0,1.0,1.0);
+    //check : ok
+    std::vector<Point> v1{p1,p2,p3,p4,p5};
+    draw_conic(v1, v1.size(),viewer);
+    //check : ok
+    // on construit la conique
+    // Conic C1(v1); //pas ok
+
+    // // std::cout <<"test"<<std::endl;    
+    // // on transmet ses coeff à la conique de geogebra
+    // Eigen::VectorXd conic1(6);
+    // conic1 << C1.a(), C1.b(), C1.c(), C1.d(), C1.e(), C1.f();
+    // // conic1 << 4,5,7,2,1,7;
+    // std::cout << C1.a()<<std::endl;
+
+    // // on la push
+    // viewer.push_conic(conic1, 0, 0, 200);
 }
 
 void draw_random(Viewer_conic viewer){ //conique de points random
