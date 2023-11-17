@@ -51,9 +51,14 @@ int main()
 
   // draw
   draw_1(viewer);
+  draw_w0(viewer);
   draw_random(viewer, 10);
-  draw_random (viewer, 50);
-  draw_types(viewer);
+  // draw_random (viewer, 50);
+  // draw_types(viewer);
+  draw_circle(viewer);
+  draw_ellipse(viewer);
+  draw_parabole(viewer);
+  draw_hyperbole(viewer);
 
   // render
   viewer.display(); // on terminal
