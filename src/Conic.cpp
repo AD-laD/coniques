@@ -20,7 +20,6 @@ void Conic::set_vector(Eigen::VectorXd vect){
 }
 
 //getter
-
 double Conic::a(){return(m_coeff[0]);}
 //template <typename T>
 double Conic::b(){return(m_coeff[1]);}
@@ -39,15 +38,14 @@ Conic::Conic(std::vector<Point> point_vector){
     //if(n<5){} error message not enough points
     //in(n>5){this->set_vector(moindres_carres(point_vector))}
     Eigen::MatrixXd A(n,6);
-    int i=0;
-    for(Point p : point_vector){ 
-        A(i,0) = p.x()*p.x();
-        A(i,1) = p.x()*p.y();
-        A(i,2) = p.y()*p.y();
-        A(i,3) = p.x()*p.w();
-        A(i,4) = p.y()*p.w();
-        A(i,5) = p.w()*p.w();
-        i++;
+
+    for(int i=0;i<n;i++){
+        A(i,0) = point_vector[i].x()*point_vector[i].x();
+        A(i,1) = point_vector[i].x()*point_vector[i].y();
+        A(i,2) = point_vector[i].y()*point_vector[i].y();
+        A(i,3) = point_vector[i].x()*point_vector[i].w();
+        A(i,4) = point_vector[i].y()*point_vector[i].w();
+        A(i,5) = point_vector[i].w()*point_vector[i].w();
     }
     Eigen::JacobiSVD<Eigen::MatrixXd> svd(A, Eigen::ComputeThinU|Eigen::ComputeFullV);
     Eigen::VectorXd x=svd.matrixV().rightCols(1);

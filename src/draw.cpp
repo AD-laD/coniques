@@ -7,7 +7,7 @@
 // faire une fonction draw_conic à qui on donne un std::vector<Point> et qui draw la conic pour alléger les fonctions draw
 void draw_1(Viewer_conic &viewer){
     // on choisi 5 points de contrôle
-    Point p1(5,5,1),p2(-3,2,1),p3(-4,-4,1),p4(1,-2,1),p5(0,1,1);
+    Point p1(5.0,5.0,1.0),p2(-3.0,2.0,1.0),p3(-4.0,-4.0,1.0),p4(1.0,-2.0,1.0),p5(0.0,1.0,1.0);
     //check : ok
     std::vector<Point> v1{p1,p2,p3,p4,p5};
     //check : ok
