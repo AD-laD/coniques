@@ -4,6 +4,7 @@
 #include "Geogebra_conics.hpp"
 #include "Conic.hpp"
 #include "point.hpp"
+#include "Faisceau.hpp"
 
 namespace draw{
     void conic_from_points(std::vector<Point> vector, Viewer_conic &viewer, const unsigned int r, const unsigned int g, const unsigned int b);
@@ -14,5 +15,6 @@ namespace draw{
     void ellipse_conic(Viewer_conic &viewer);
     void parabole_conic(Viewer_conic &viewer);
     void hyperbole_conic(Viewer_conic &viewer);
+    void faisceau(Viewer_conic &viewer,const unsigned int r, const unsigned int g, const unsigned int b);
 }
 

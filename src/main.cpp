@@ -60,6 +60,8 @@ int main()
   // draw::parabole_conic(viewer);
   // draw::hyperbole_conic(viewer);
 
+  draw::faisceau(viewer, 150, 0, 150);
+
   // render
   viewer.display(); // on terminal
   viewer.render("output.html");  // generate the output file (to open with your web browser)

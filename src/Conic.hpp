@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "point.hpp"
 
 #include <C:\eigen-3.4.0\Eigen\Dense>
@@ -24,10 +25,16 @@ class Conic {
 
         //getter
         double a(), b(), c(), d(), e(), f();
+        std::vector<double> get_coeff();
 
         //conic type
         bool is_cercle();
         bool is_ellipse();
         bool is_parabole();
         bool is_hyperbole();
+
+        //operator
+        Conic operator/(const double a);
+        Conic operator*(const double a);
+        Conic operator+(Conic C);
 };

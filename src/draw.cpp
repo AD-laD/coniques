@@ -119,4 +119,30 @@ void draw::hyperbole_conic(Viewer_conic &viewer){
 
 }
 
+void draw::faisceau(Viewer_conic &viewer, const unsigned int r, const unsigned int g, const unsigned int b){
+
+    // faisceau basique
+    // on contruit nos 2 coniques de base
+    Conic Ca({2.0, 3.0, 1.0, 5.0, 3.0, 2.0});
+    Conic Cb({1.0, -3.0, 1.0, 5.0, -2.0, 1.0});
+    // on construit le faisceau
+    Faisceau F(Ca, Cb);
+
+    // on boucle sur ses coniques
+    for(int i=0;i<F.get_num_conic();i++){
+        // on transmet ses coeff à la conique de geogebra
+        Eigen::VectorXd conic1(6);
+        conic1 << F.get_Ci()[i].a(), F.get_Ci()[i].b(), F.get_Ci()[i].c(), F.get_Ci()[i].d(), F.get_Ci()[i].e(), F.get_Ci()[i].f();
+        // on la push
+        try{
+            viewer.push_conic(conic1, r, g, b);
+        }
+        catch (std::runtime_error) {
+            // std::cout <<"Erreur lors du dessin de la conique dans le viewer"<<std::endl;
+            std::cerr << "erreur lors du dessin de la conique" << std::endl;
+        }
+    }
+
+}
+
 

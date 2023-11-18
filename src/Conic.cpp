@@ -5,32 +5,31 @@
 #include <C:\eigen-3.4.0\Eigen\Dense>
 
 //setter
-//template <typename T>
 void Conic::set_value(unsigned int i, double& value){
     m_coeff[i] = value;
 }
-//template <typename T>
+
 void Conic::set_vector(std::vector<double> &vect){
     m_coeff = vect;
 }
 
-//template <typename T>
 void Conic::set_vector(Eigen::VectorXd &vect){
     for(int i=0;i<6;i++) m_coeff[i] = vect[i];
 }
 
 //getter
 double Conic::a(){return(m_coeff[0]);}
-//template <typename T>
 double Conic::b(){return(m_coeff[1]);}
-//template <typename T>
 double Conic::c(){return(m_coeff[2]);}
-//template <typename T>
 double Conic::d(){return(m_coeff[3]);}
-//template <typename T>
 double Conic::e(){return(m_coeff[4]);}
-//template <typename T>
 double Conic::f(){return(m_coeff[5]);}
+
+std::vector<double> Conic::get_coeff(){
+    std::vector<double> coeff;
+    for(int i=0;i<6;i++) coeff[i] = m_coeff[i];
+    return(coeff);
+}
 
 Conic::Conic(std::vector<Point> point_vector){
 
@@ -61,6 +60,22 @@ Conic::Conic(std::vector<Point> point_vector){
 
 Conic::Conic() : m_coeff({0,0,0,0,0,0}){}
 
+Conic Conic::operator/(const double a){
+    std::for_each(m_coeff.begin(),m_coeff.end(),[a](double x){x/a;});
+    return(*this);
+}
+
+Conic Conic::operator*(const double a){
+    std::for_each(m_coeff.begin(),m_coeff.end(),[a](double x){x*a;});
+    return(*this);
+}
+
+Conic Conic::operator+(Conic C){
+    for(int i=0;i<6;i++){
+        this->get_coeff()[i] += C.get_coeff()[i];
+    }
+    return(*this);
+}
 
 std::vector<Point> moindres_carres(std::vector<Point> point_vector){
 
