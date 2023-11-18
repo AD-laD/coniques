@@ -50,15 +50,15 @@ int main()
   // viewer.push_conic(conic, 0,0,200);
 
   // draw
-  draw_1(viewer);
-  draw_w0(viewer);
-  draw_random(viewer, 10);
-  // draw_random (viewer, 50);
-  // draw_types(viewer);
-  draw_circle(viewer);
-  draw_ellipse(viewer);
-  draw_parabole(viewer);
-  draw_hyperbole(viewer);
+  draw::classic_conic(viewer);
+  draw::set_w_to_conic(viewer, 2); //on peut choisir la valeur de la coordonnée homogène des points
+  draw::set_w_to_conic(viewer, 3);
+  draw::set_w_to_conic(viewer, 4);
+  // draw::random_points(viewer, 10);
+  // draw::circle_conic(viewer);
+  // draw::ellipse_conic(viewer);
+  // draw::parabole_conic(viewer);
+  // draw::hyperbole_conic(viewer);
 
   // render
   viewer.display(); // on terminal

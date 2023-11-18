@@ -35,8 +35,10 @@ double Conic::f(){return(m_coeff[5]);}
 Conic::Conic(std::vector<Point> point_vector){
 
     int n = point_vector.size();
-    //if(n<5){} error message not enough points
-    //in(n>5){this->set_vector(moindres_carres(point_vector))}
+    assert ((n>=5) && "erreur : il faut au moins 5 points de controle pour construire la conique");
+    //verifie à l'exécution qu'il y a bien au moins 5 points de controles
+
+    //if(n>5){this->set_vector(moindres_carres(point_vector))}
     Eigen::MatrixXd A(n,6);
 
     for(int i=0;i<n;i++){

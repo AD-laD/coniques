@@ -5,12 +5,14 @@
 #include "Conic.hpp"
 #include "point.hpp"
 
-void draw_conic(std::vector<Point> vector, Viewer_conic &viewer, const unsigned int r, const unsigned int g, const unsigned int b);
-void draw_1(Viewer_conic &viewer);
-void draw_w0(Viewer_conic &viewer);
-void draw_random(Viewer_conic &viewer, const unsigned int n);
-void draw_types(Viewer_conic &viewer);
-void draw_circle(Viewer_conic &viewer);
-void draw_ellipse(Viewer_conic &viewer);
-void draw_parabole(Viewer_conic &viewer);
-void draw_hyperbole(Viewer_conic &viewer);
+namespace draw{
+    void conic_from_points(std::vector<Point> vector, Viewer_conic &viewer, const unsigned int r, const unsigned int g, const unsigned int b);
+    void classic_conic(Viewer_conic &viewer);
+    void set_w_to_conic(Viewer_conic &viewer, const double w);
+    void random_points(Viewer_conic &viewer, const unsigned int n);
+    void circle_conic(Viewer_conic &viewer);
+    void ellipse_conic(Viewer_conic &viewer);
+    void parabole_conic(Viewer_conic &viewer);
+    void hyperbole_conic(Viewer_conic &viewer);
+}
+

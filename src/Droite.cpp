@@ -14,7 +14,7 @@ void Droite::set_c(double& c){m_c=c;}
 
 
 Droite Droite::passage(Point& x1, const Point& x2){ 
-    //si une droite passe par x1 et x2, elle est égale au prodvect de x1 et x2
+    //si une droite passe par x1 et x2, elle est égale au product de x1 et x2
     Point result = x1.prod_vect(x2); //produit vectoriel de x1 et x2
     double a = result.x();
     double b = result.y();

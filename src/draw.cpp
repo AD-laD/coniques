@@ -3,33 +3,43 @@
 #include "random"
 #include "chrono"
 
+//assert : pour des erreurs de code qui pourraient arriver (de notre faute)
+//exceptions : pour des erreurs qui pourraient arriver de l'extérieur, à cause d"un souci...
+
+
 // faire une fonction draw_conic à qui on donne un std::vector<Point> et qui draw la conic pour alléger les fonctions draw
-void draw_conic(std::vector<Point> vector, Viewer_conic &viewer, const unsigned int r, const unsigned int g, const unsigned int b){
+void draw::conic_from_points(std::vector<Point> vector, Viewer_conic &viewer, const unsigned int r, const unsigned int g, const unsigned int b){
 
     Conic C1(vector); //création de la conique
     // on transmet ses coeff à la conique de geogebra
     Eigen::VectorXd conic1(6);
     conic1 << C1.a(), C1.b(), C1.c(), C1.d(), C1.e(), C1.f();
     // on la push
-    viewer.push_conic(conic1, r, g, b);
+
+    try{
+        viewer.push_conic(conic1, r, g, b);
+    }
+    catch (std::runtime_error) {
+        // std::cout <<"Erreur lors du dessin de la conique dans le viewer"<<std::endl;
+        std::cerr << "erreur lors du dessin de la conique" << std::endl;
+    }
 }
 
-void draw_1(Viewer_conic &viewer){
+void draw::classic_conic(Viewer_conic &viewer){
     // on choisi 5 points de contrôle
     //en bleu
     Point p1(5.0,5.0,1.0), p2(-3.0,2.0,1.0), p3(-4.0,-4.0,1.0), p4(1.0,-2.0,1.0), p5(0.0,1.0,1.0);
     std::vector<Point> v1{p1,p2,p3,p4,p5};
-    draw_conic(v1,viewer,0,0,200);
+    draw::conic_from_points(v1,viewer,0,0,200);
 }
 
-void draw_w0(Viewer_conic &viewer){
-    // on choisi 5 points de contrôle
-    Point p1(3.0,-5.0,0.0), p2(2.0,2.0,0.0), p3(-1.0,-4.0,0.0), p4(1.0,2.0,0.0), p5(0.0,-3.0,0.0);
+void draw::set_w_to_conic(Viewer_conic &viewer, const double w){
+    Point p1(5.0,5.0,w), p2(-3.0,2.0,w), p3(-4.0,-4.0,w), p4(1.0,-2.0,w), p5(0.0,1.0,w);
     std::vector<Point> v1{p1,p2,p3,p4,p5};
-    draw_conic(v1,viewer,0,200,0);
+    draw::conic_from_points(v1,viewer,0,0,200);
 }
 
-void draw_random(Viewer_conic &viewer, const unsigned int n){ 
+void draw::random_points(Viewer_conic &viewer, const unsigned int n){ 
     //conique de (n) points random
     //en ROUGE
 
@@ -45,14 +55,14 @@ void draw_random(Viewer_conic &viewer, const unsigned int n){
         Point p (uniformRealDistribution(generator), uniformRealDistribution(generator), uniformRealDistribution(generator));
         v2.push_back(p); //ajout de chaque point au vecteur v2
     }
-    draw_conic(v2,viewer,200,0,0);
+    draw::conic_from_points(v2,viewer,200,0,0);
 }
 
 //DRAW TYPES
 
 // void draw_types(Viewer_conic &viewer){
     //créée des coniques à partir des coef
-void draw_circle(Viewer_conic &viewer){
+void draw::circle_conic(Viewer_conic &viewer){
     //cercle : a = c et b=0
     Conic cCercle;
     std::vector<double> vCercle = {1.0,0.0,1.0,5.0,3.0,2.0};
@@ -60,13 +70,12 @@ void draw_circle(Viewer_conic &viewer){
     Eigen::VectorXd conicCercle(6);
     conicCercle << cCercle.a(), cCercle.b(), cCercle.c(), cCercle.d(), cCercle.e(), cCercle.f();
     // on la push
-    // static_assert(cCercle.is_cercle(), "La conique n'est pas un cercle !");
-    //idee de static assert
+    assert (cCercle.is_cercle() && "erreur : la conique cercle ne vérifie pas l'équation");
 
     viewer.push_conic(conicCercle, 0, 200, 0);
 }
 
-void draw_ellipse(Viewer_conic &viewer){
+void draw::ellipse_conic(Viewer_conic &viewer){
 
     //ellipse
     //b()*b()-4*a()*c()<0
@@ -75,10 +84,12 @@ void draw_ellipse(Viewer_conic &viewer){
     cEllipse.set_vector(vEllipse);
     Eigen::VectorXd conicEllipse(6);
     conicEllipse << cEllipse.a(), cEllipse.b(), cEllipse.c(), cEllipse.d(), cEllipse.e(), cEllipse.f();
+
+    assert (cEllipse.is_ellipse() && "erreur : la conique ellipse ne vérifie pas l'équation");
     viewer.push_conic(conicEllipse, 0, 200, 0);
 }
 
-void draw_parabole(Viewer_conic &viewer){
+void draw::parabole_conic(Viewer_conic &viewer){
 
     //parabole
     //b()*b()-4*a()*c()==0
@@ -87,10 +98,12 @@ void draw_parabole(Viewer_conic &viewer){
     cParab.set_vector(vParab);
     Eigen::VectorXd conicParab(6);
     conicParab << cParab.a(), cParab.b(), cParab.c(), cParab.d(), cParab.e(), cParab.f();
+
+    assert (cParab.is_parabole() && "erreur : la conique parabole ne vérifie pas l'équation");
     viewer.push_conic(conicParab, 0, 200, 0);
 }
 
-void draw_hyperbole(Viewer_conic &viewer){
+void draw::hyperbole_conic(Viewer_conic &viewer){
 
     //hyperbole
     //b()*b()-4*a()*c()>0
@@ -99,6 +112,9 @@ void draw_hyperbole(Viewer_conic &viewer){
     cHyper.set_vector(vHyper);
     Eigen::VectorXd conicHyper(6);
     conicHyper << cHyper.a(), cHyper.b(), cHyper.c(), cHyper.d(), cHyper.e(), cHyper.f();
+
+    assert (cHyper.is_hyperbole() && "erreur : la conique hyperbole ne vérifie pas l'équation");
+
     viewer.push_conic(conicHyper, 0, 200, 0);
 
 }
