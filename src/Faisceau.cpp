@@ -20,8 +20,7 @@ Faisceau::Faisceau(Conic Ca, Conic Cb){
     Conic C1;
     m_Ci.resize(num_conic);
     for(int i=0;i<num_conic;i++){
-        //set_Ci(i,Ca*std::cos(3.141592/num_conic*i) + Ca*std::sin(3.141592/num_conic*i)) ;
-        set_Ci(i,C1);
+        set_Ci(i,Ca*std::cos(3.141592/num_conic*i) + Ca*std::sin(3.141592/num_conic*i)) ;
     }
 }
 
