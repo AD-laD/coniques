@@ -125,8 +125,10 @@ void draw::faisceau(Viewer_conic &viewer, const unsigned int r, const unsigned i
     // on contruit nos 2 coniques de base
     Conic Ca({2.0, 3.0, 1.0, 5.0, 3.0, 2.0});
     Conic Cb({1.0, -3.0, 1.0, 5.0, -2.0, 1.0});
+    std::cout<<"testtest"<<std::endl;
     // on construit le faisceau
     Faisceau F(Ca, Cb);
+    std::cout << "test2" <<std::endl;
 
     // on boucle sur ses coniques
     for(int i=0;i<F.get_num_conic();i++){
@@ -144,5 +146,3 @@ void draw::faisceau(Viewer_conic &viewer, const unsigned int r, const unsigned i
     }
 
 }
-
-
