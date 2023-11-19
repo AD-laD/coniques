@@ -17,6 +17,7 @@ class Faisceau {
         Faisceau(Conic Ca, Conic Cb);
         ~Faisceau() = default;
         void set_num_conic(int a); 
+        void set_Ci(int index, const Conic C0);
         int get_num_conic();
         std::vector<Conic> get_Ci();
 };

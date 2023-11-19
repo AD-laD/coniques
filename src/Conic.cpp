@@ -27,7 +27,7 @@ double Conic::f(){return(m_coeff[5]);}
 
 std::vector<double> Conic::get_coeff(){
     std::vector<double> coeff;
-    for(int i=0;i<6;i++) coeff[i] = m_coeff[i];
+    coeff = m_coeff;
     return(coeff);
 }
 
