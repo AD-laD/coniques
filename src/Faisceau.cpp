@@ -22,9 +22,7 @@ Faisceau::Faisceau(Conic Ca, Conic Cb){
     for(int i=0;i<num_conic;i++){
         //set_Ci(i,Ca*std::cos(3.141592/num_conic*i) + Ca*std::sin(3.141592/num_conic*i)) ;
         set_Ci(i,C1);
-        std::cout<< "test1"<<std::endl;
     }
-    std::cout<< "test2"<<std::endl;
 }
 
 void Faisceau::set_num_conic(int a){num_conic = a;}
