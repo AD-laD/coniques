@@ -16,5 +16,6 @@ namespace draw{
     void parabole_conic(Viewer_conic &viewer);
     void hyperbole_conic(Viewer_conic &viewer);
     void faisceau(Viewer_conic &viewer,const unsigned int r, const unsigned int g, const unsigned int b);
+    void conic_from_tangents(std::vector<Droite> vector, Viewer_conic &viewer, const unsigned int r, const unsigned int g, const unsigned int b);
+    void conic_tangents(Viewer_conic &viewer);
 }
-

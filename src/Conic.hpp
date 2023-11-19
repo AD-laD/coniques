@@ -3,10 +3,11 @@
 #include <vector>
 #include <algorithm>
 #include "point.hpp"
+#include "Droite.hpp"
 
 #include <C:\eigen-3.4.0\Eigen\Dense>
 
-
+//template <typename T> // T peut etre Point ou Droite
 class Conic {
     private :
         double m_a, m_b,m_c,m_d,m_e,m_f;
@@ -14,6 +15,8 @@ class Conic {
 
     public : 
         Conic(std::vector<Point> point_vector); //5 points constructor
+        Conic(std::vector<Droite> droite_vector);
+        Conic(std::vector<double> vector);
         //Conic(Conic C0); //copy constructor
         Conic(); // default constructor
         ~Conic() = default;

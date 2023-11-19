@@ -7,7 +7,6 @@
 //exceptions : pour des erreurs qui pourraient arriver de l'extérieur, à cause d"un souci...
 
 
-// faire une fonction draw_conic à qui on donne un std::vector<Point> et qui draw la conic pour alléger les fonctions draw
 void draw::conic_from_points(std::vector<Point> vector, Viewer_conic &viewer, const unsigned int r, const unsigned int g, const unsigned int b){
 
     Conic C1(vector); //création de la conique
@@ -123,12 +122,12 @@ void draw::faisceau(Viewer_conic &viewer, const unsigned int r, const unsigned i
 
     // faisceau basique
     // on contruit nos 2 coniques de base
-    Conic Ca({2.0, 3.0, 1.0, 5.0, 3.0, 2.0});
-    Conic Cb({1.0, -3.0, 1.0, 5.0, -2.0, 1.0});
-    std::cout<<"testtest"<<std::endl;
+    std::vector<double> va{2.0, 3.0, 1.0, 5.0, 3.0, 2.0};
+    std::vector<double> vb{1.0, -3.0, 1.0, 5.0, -2.0, 1.0};
+    Conic Ca(va);
+    Conic Cb(vb);
     // on construit le faisceau
     Faisceau F(Ca, Cb);
-    std::cout << "test2" <<std::endl;
 
     // on boucle sur ses coniques
     for(int i=0;i<F.get_num_conic();i++){
@@ -145,4 +144,49 @@ void draw::faisceau(Viewer_conic &viewer, const unsigned int r, const unsigned i
         }
     }
 
+}
+
+
+void draw::conic_from_tangents(std::vector<Droite> vector, Viewer_conic &viewer, const unsigned int r, const unsigned int g, const unsigned int b){
+
+    Conic C1(vector); //création de la conique
+    // on transmet ses coeff à la conique de geogebra
+    Eigen::VectorXd conic1(6);
+    conic1 << C1.a(), C1.b(), C1.c(), C1.d(), C1.e(), C1.f();
+    // on la push
+
+    try{
+        viewer.push_conic(conic1, r, g, b);
+    }
+    catch (std::runtime_error) {
+        // std::cout <<"Erreur lors du dessin de la conique dans le viewer"<<std::endl;
+        std::cerr << "erreur lors du dessin de la conique" << std::endl;
+    }
+}
+
+void draw::conic_tangents(Viewer_conic &viewer){
+    // on créé une conique à partir de 5 tangentes
+    // on l'affiche avec ses tangentes
+    /*Droite d1(1,2,3),d2(-1,-1,5),d3(0,2.5,3),d4(-4,-5,0),d5(2,3,4);
+    std::vector<Droite> vect{d1,d3,d3,d4,d5};
+    draw::conic_from_tangents(vect, viewer, 0,200,200);
+    //Eigen::VectorXd v1(1,2), v2(-1,-1),v3(0,2.5),v4(-4,-5),v5(2,3);
+    Eigen::VectorXd v1,v2,v3,v4,v5;
+    v1 << 1, 2;
+    v2 << -1,-1;
+    v3 << 0,2.5;
+    v4 << -4,-5;
+    v5 << 2,3;
+    Eigen::Vector dir1,dir2,dir3,dir4,dir5;
+    dir1 << 3;
+    dir2 << 5;
+    dir3 << 3;
+    dir4 << 0;
+    dir5 << 4;
+    //Eigen::VectorXd dir1(3),dir2(5),dir3(3),dir4(0),dir5(4);
+    viewer.push_line(v1,dir1,0,0,250);
+    viewer.push_line(v2,dir2,0,0,250);
+    viewer.push_line(v3,dir3,0,0,250);
+    viewer.push_line(v4,dir4,0,0,250);
+    viewer.push_line(v5,dir5,0,0,250);*/
 }

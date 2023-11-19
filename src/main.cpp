@@ -60,7 +60,10 @@ int main()
   // draw::parabole_conic(viewer);
   // draw::hyperbole_conic(viewer);
 
+  // A TEST
   draw::faisceau(viewer, 150, 0, 150);
+  // A patch
+  draw::conic_tangents(viewer);
 
   // render
   viewer.display(); // on terminal
