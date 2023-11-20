@@ -64,6 +64,7 @@ int main()
   draw::faisceau(viewer, 150, 0, 150);
   // A patch
   draw::conic_tangents(viewer);
+  
 
   // render
   viewer.display(); // on terminal
