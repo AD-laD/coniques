@@ -1,6 +1,5 @@
 #include "Faisceau.hpp"
 
-
 Faisceau::Faisceau(Conic& Ca, Conic& Cb){
     // on verifie que Ca et Cb normées
     // norm_a = somme des coeff au carré
@@ -20,30 +19,22 @@ Faisceau::Faisceau(Conic& Ca, Conic& Cb){
 
     // chacune des i coniques du faisceau vaut : cos(t)*Ca+sin(t)*Cb
     // avec t = pi/i, i dans [0,pi]
-    Conic C1;
+    // Conic C1;
+    // Conic C2;
     m_Ci.resize(m_num_conic);
     for(int i=0;i<m_num_conic;i++){
-        //set_Ci(i,Ca*std::cos(3.141592/m_num_conic*i)+ Cb*std::sin(3.141592/m_num_conic*i));
         double t = 3.141592/m_num_conic*i; 
         Conic C1 = Ca * std::cos(t);
         Conic C2 = Cb * std::sin(t);
         Conic Cc = C1 + C2;
         set_Ci(i,Cc);
-
-        
-        //std::vector<double> coeff = {1.0+0.1*i,2.0+0.1*i,2.0*i,3.0*i,2.0*i,2.0*i};
-        //Cc.set_vector(coeff);
-        // std::cout << "le coeff 1 de Cc vaut"<<Cc.a()<<std::endl;
-        // std::cout <<"le a de ci de i vaut " <<m_Ci[i].a()<<std::endl;
     }
 }
 
 void Faisceau::set_num_conic(const unsigned int &a){m_num_conic = a;}
 void Faisceau::set_Ci(int index, Conic &C0){
         std::vector<double> coeff = C0.get_coeff();
-        // std::cout<<"le coeff 1 du vect "<<coeff[1]<<std::endl;
         m_Ci[index].set_vector(coeff);
-        //std::cout<<"le coeff b de m_ci vaut "<<m_Ci[index].b()<<std::endl;
         }
 void Faisceau::set_Ca(const Conic &Ca){m_Ca=Ca;}
 void Faisceau::set_Cb(const Conic &Cb){m_Cb=Cb;}

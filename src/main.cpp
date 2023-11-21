@@ -31,16 +31,6 @@ int main()
   viewer.push_point(pt2, "p2", 200,0,0);
   viewer.push_point(pt3, 200,0,0);*/
 
-  //tests class point
-  // Point a(1,1,1);
-  // Point b(2,2,1);
-  // std::cout << a.x() << std::endl;
-  // std::cout << b.y() << std::endl;
-  // Point result = a.prod_vect(b);
-  // std::cout<< result.x() << std::endl;
-  // std::cout<< result.y() << std::endl;
-  // std::cout<< result.w() << std::endl;
-
   // draw line
   // viewer.push_line(pt1, pt2-pt1,  200,200,0);
 
@@ -50,11 +40,11 @@ int main()
   // viewer.push_conic(conic, 0,0,200);
 
   // draw
-  draw::classic_conic(viewer);
-  draw::set_w_to_conic(viewer, 2); //on peut choisir la valeur de la coordonnée homogène des points
-  draw::set_w_to_conic(viewer, 3);
-  draw::set_w_to_conic(viewer, 4);
-  // draw::random_points(viewer, 10);
+  // draw::classic_conic(viewer);
+  // draw::set_w_to_conic(viewer, 2); //on peut choisir la valeur de la coordonnée homogène des points
+  // draw::set_w_to_conic(viewer, 3);
+  // draw::set_w_to_conic(viewer, 4);
+  draw::random_points(viewer, 10);
   // draw::circle_conic(viewer);
   // draw::ellipse_conic(viewer);
   // draw::parabole_conic(viewer);
@@ -70,14 +60,10 @@ int main()
   // Conic A;
   // std::vector<double> coeffA = {5.0,2.0, 3.0, 4.0, 5.0,6.0};
   // A.set_vector(coeffA);
-  // A=A*2;
-  
   // Conic B;
   // std::vector<double> coeffB = {1.0,1.0, 1.0, 1.0, 1.0,1.0};
   // B.set_vector(coeffB);
-  // Conic C = A+B;
-  // std::cout<<"LE A DE A VAUT "<<A.a()<<std::endl;
-  
+  // Conic C = A+B;  
 
   // render
   viewer.display(); // on terminal

@@ -6,15 +6,13 @@
 //assert : pour des erreurs de code qui pourraient arriver (de notre faute)
 //exceptions : pour des erreurs qui pourraient arriver de l'extérieur, à cause d"un souci...
 
-
 void draw::conic_from_points(std::vector<Point> vector, Viewer_conic &viewer, const unsigned int r, const unsigned int g, const unsigned int b){
 
-    Conic C1(vector); //création de la conique
+    Conic C1(vector); //création de la conique à partir d'un vecteur de points
     // on transmet ses coeff à la conique de geogebra
     Eigen::VectorXd conic1(6);
     conic1 << C1.a(), C1.b(), C1.c(), C1.d(), C1.e(), C1.f();
     // on la push
-
     try{
         viewer.push_conic(conic1, r, g, b);
     }
@@ -41,20 +39,35 @@ void draw::set_w_to_conic(Viewer_conic &viewer, const double w){
 void draw::random_points(Viewer_conic &viewer, const unsigned int n){ 
     //conique de (n) points random
     //en ROUGE
+    draw::conic_from_points(create_random_points(n),viewer,200,0,0);
+}
 
+std::vector<Point> draw::create_random_points(const unsigned int n){ 
     // selection de la seed
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-	// std::cout << "seed : " << seed << std::endl;
-
     // selection du générateur random 
 	std::default_random_engine generator(seed);
 	std::uniform_real_distribution<double> uniformRealDistribution(-5,5); //distribution de réels entre -5 et 5
-    std::vector<Point> v2;
+    std::vector<Point> randomPoints;
     for(unsigned int i=1; i <n+1 ; i++){
         Point p (uniformRealDistribution(generator), uniformRealDistribution(generator), uniformRealDistribution(generator));
-        v2.push_back(p); //ajout de chaque point au vecteur v2
+        randomPoints.push_back(p); //ajout de chaque point au vecteur v2
     }
-    draw::conic_from_points(v2,viewer,200,0,0);
+    return randomPoints;
+}
+
+std::vector<double> create_random_coeff(){
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    // selection du générateur random 
+	std::default_random_engine generator(seed);
+	std::uniform_real_distribution<double> uniformIntDistribution(0,10); //distribution d'int entre 0 et 10
+    std::vector<double> randomCoeff;
+    for(unsigned int i=0; i <6 ; i++){
+        int val = uniformIntDistribution(generator);
+        std::cout<<static_cast<float>(val-5);
+        randomCoeff.push_back(static_cast<float>(val - 5)); //ajout de chaque coeff au vecteur (coeff egaux à 1.0, 2.0,.... <=5 et >=-5)
+    }
+    return randomCoeff;
 }
 
 //DRAW TYPES
@@ -122,8 +135,11 @@ void draw::faisceau(Viewer_conic &viewer, const unsigned int r, const unsigned i
 
     // faisceau basique
     // on contruit nos 2 coniques de base
-    std::vector<double> va{1.0, 3.0, 5.0, 5.0, 3.0, 2.0};
-    std::vector<double> vb{1.0, -3.0, 3.0, 5.0, -2.0, 1.0};
+    // std::vector<double> va{1.0, 3.0, 5.0, 5.0, 3.0, 2.0};
+    // std::vector<double> vb{1.0, -3.0, 3.0, 5.0, -2.0, 1.0};
+
+    std::vector<double> va = create_random_coeff();
+    std::vector<double> vb = create_random_coeff();
     Conic Ca(va);
     Conic Cb(vb);
     // on construit le faisceau
@@ -143,9 +159,7 @@ void draw::faisceau(Viewer_conic &viewer, const unsigned int r, const unsigned i
             std::cerr << "erreur lors du dessin de la conique" << std::endl;
         }
     }
-
 }
-
 
 void draw::conic_from_tangents(std::vector<Droite> vector, Viewer_conic &viewer, const unsigned int r, const unsigned int g, const unsigned int b){
 
