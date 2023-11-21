@@ -1,4 +1,4 @@
-#include "point.hpp"
+#include "Point.hpp"
 
 Point::Point(const double &x, const double &y, const double &w) : m_x(x),m_y(y),m_w(w){} 
 
@@ -17,8 +17,5 @@ Point Point::prod_vect(const Point& b){
     c.m_x = m_y*b.m_w - m_w*b.m_y;
     c.m_y = m_w*b.m_x - m_x*b.m_w;
     c.m_w = m_x*b.m_y - m_y*b.m_x;
-
-    //assert(c.m_x != 0 || c.m_y != 0 || c.m_w != 0 && "Produit vectoriel nul entre les points!");
-
     return c;
 }

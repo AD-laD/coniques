@@ -1,8 +1,4 @@
-#pragma once
-#include <iostream>
-
-#include <C:\eigen-3.4.0\Eigen\Dense>
-#include "point.hpp"
+#include "Point.hpp"
 
 
 class Droite {

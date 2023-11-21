@@ -1,10 +1,9 @@
-#include <iostream>
-#include <vector>
 #include "Conic.hpp"
 
-#include <C:\eigen-3.4.0\Eigen\Dense>
+//default constructor
+Conic::Conic() : m_coeff({0,0,0,0,0,0}){}
 
-//setter
+//setters
 
 void Conic::set_value(unsigned int i, double& value){ //pas verif
     m_coeff[i] = value;
@@ -20,13 +19,14 @@ void Conic::set_vector(Eigen::VectorXd &vect){
 }
 
 
-//getter
+//getters
 double Conic::a(){return(m_coeff[0]);}
 double Conic::b(){return(m_coeff[1]);}
 double Conic::c(){return(m_coeff[2]);}
 double Conic::d(){return(m_coeff[3]);}
 double Conic::e(){return(m_coeff[4]);}
 double Conic::f(){return(m_coeff[5]);}
+
 
 std::vector<double> Conic::get_coeff(){
     std::vector<double> coeff;
@@ -63,11 +63,14 @@ Conic::Conic(std::vector<Point> point_vector){
     }
     set_vector(coefficients);
 }
+
+Conic::Conic(std::vector<double> vector) : m_coeff(vector){}
+
+
 Conic::Conic(std::vector<Droite> droite_vector){
 
     int n = droite_vector.size();
-    assert ((n>=5) && "erreur : il faut au moins 5 points de controle pour construire la conique");
-    //verifie à l'exécution qu'il y a bien au moins 5 points de controles
+    assert ((n>=5) && "erreur : il faut au moins 5 droites pour construire la conique");
 
     //if(n>5){this->set_vector(moindres_carres(point_vector))}
     Eigen::MatrixXd A(n,6);
@@ -89,11 +92,9 @@ Conic::Conic(std::vector<Droite> droite_vector){
     set_vector(coefficients);
 }
 
-Conic::Conic() : m_coeff({0,0,0,0,0,0}){}
+//opérateurs
 
-Conic::Conic(std::vector<double> vector) : m_coeff(vector){}
-
-Conic Conic::operator/(const double a){ //pas encore verif
+Conic Conic::operator/(const double a){
 
     //gestion des erreurs : verif que a n'est pas égal a 0 sinn arreter le programme
     //static_assert ((a=0) && "erreur : on essaie de diviser une conique par 0");
@@ -128,12 +129,8 @@ std::vector<Point> moindres_carres(std::vector<Point> point_vector){
 
 }
 
-// conic type
-//template <typename T>
+// types de conique 
 bool Conic::is_cercle(){return(a()==c() && b()==0);}
-//template <typename T>
 bool Conic::is_ellipse(){return(b()*b()-4*a()*c()<0);}
-//template <typename T>
 bool Conic::is_parabole(){return(b()*b()-4*a()*c()==0);}
-//template <typename T>
 bool Conic::is_hyperbole(){return(b()*b()-4*a()*c()>0);}

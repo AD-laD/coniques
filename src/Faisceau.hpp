@@ -1,12 +1,8 @@
 #pragma once
-#include <iostream>
-#include <vector>
 #include <algorithm>
 #include <cmath>
 //#include <numbers>
 #include "Conic.hpp"
-
-#include <C:\eigen-3.4.0\Eigen\Dense>
 
 class Faisceau {
     private : 

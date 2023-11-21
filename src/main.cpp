@@ -4,8 +4,9 @@
 // #include <Eigen/Dense>
 #include <C:\eigen-3.4.0\Eigen\Dense>
 #include "Geogebra_conics.hpp"
-#include "point.hpp"
+#include "Point.hpp"
 #include "draw.hpp"
+#include "ConicTypes.hpp"
 
 
 int main()
@@ -37,21 +38,21 @@ int main()
   // draw conic
   // Eigen::VectorXd conic(6);
   // conic << -1.4, -0.3, -1, -0.6, 0.0, 0.8;
-  // viewer.push_conic(conic, 0,0,200);
+  // viewer.push_conic(conic, 0,0,200);  
 
-  // draw
-  // draw::classic_conic(viewer);
-  // draw::set_w_to_conic(viewer, 2); //on peut choisir la valeur de la coordonnée homogène des points
-  // draw::set_w_to_conic(viewer, 3);
-  // draw::set_w_to_conic(viewer, 4);
-  // draw::random_points(viewer, 10);
-  //draw::conic_from_points(draw::create_random_points(5),viewer,200,0,0);
-  // draw::circle_conic(viewer);
-  // draw::ellipse_conic(viewer);
-  // draw::parabole_conic(viewer);
-  // draw::hyperbole_conic(viewer);
+  //Types de coniques
+  set_w_to_conic(viewer,1);
+  set_w_to_conic(viewer, 2); //on peut choisir la valeur de la coordonnée homogène des points
+  set_w_to_conic(viewer, 3);
+  set_w_to_conic(viewer, 4);
+  circle_conic(viewer);
+  ellipse_conic(viewer);
+  parabole_conic(viewer);
+  hyperbole_conic(viewer);
 
-  draw::faisceau(viewer, 150, 0, 150);
+  //Fonctions plus complexes
+  //draw::conic_from_points(create_random_points(5),viewer,200,0,0);
+  //draw::faisceau(viewer, 150, 0, 150);
   // A patch
   //draw::conic_tangents(viewer);
 
