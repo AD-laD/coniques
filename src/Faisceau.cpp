@@ -24,10 +24,10 @@ Faisceau::Faisceau(Conic& Ca, Conic& Cb){
     m_Ci.resize(m_num_conic);
     for(int i=0;i<m_num_conic;i++){
         //set_Ci(i,Ca*std::cos(3.141592/m_num_conic*i)+ Cb*std::sin(3.141592/m_num_conic*i));
-        double t = 3.141592/m_num_conic*i;
-        Ca=Ca*std::cos(t);
-        Cb=Cb*std::sin(t);
-        Conic Cc = Ca+Cb;
+        double t = 3.141592/m_num_conic*i; 
+        Conic C1 = Ca * std::cos(t);
+        Conic C2 = Cb * std::sin(t);
+        Conic Cc = C1 + C2;
         set_Ci(i,Cc);
 
         
