@@ -67,31 +67,6 @@ Conic::Conic(std::vector<Point> point_vector){
 Conic::Conic(std::vector<double> vector) : m_coeff(vector){}
 
 
-Conic::Conic(std::vector<Droite> droite_vector){
-
-    int n = droite_vector.size();
-    assert ((n>=5) && "erreur : il faut au moins 5 droites pour construire la conique");
-
-    //if(n>5){this->set_vector(moindres_carres(point_vector))}
-    Eigen::MatrixXd A(n,6);
-
-    for(int i=0;i<n;i++){
-        A(i,0) = droite_vector[i].a()*droite_vector[i].a();
-        A(i,1) = droite_vector[i].a()*droite_vector[i].b();
-        A(i,2) = droite_vector[i].b()*droite_vector[i].b();
-        A(i,3) = droite_vector[i].a()*droite_vector[i].c();
-        A(i,4) = droite_vector[i].b()*droite_vector[i].c();
-        A(i,5) = droite_vector[i].c()*droite_vector[i].c();
-    }
-    Eigen::JacobiSVD<Eigen::MatrixXd> svd(A, Eigen::ComputeThinU|Eigen::ComputeFullV);
-    Eigen::VectorXd x=svd.matrixV().rightCols(1);
-    std::vector<double> coefficients;
-    for (int i = 0; i < x.size(); ++i) {
-        coefficients.push_back(x(i));
-    }
-    set_vector(coefficients);
-}
-
 //opérateurs
 
 Conic Conic::operator/(const double a){

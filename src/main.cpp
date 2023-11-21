@@ -53,8 +53,6 @@ int main()
   //Fonctions plus complexes
   //draw::conic_from_points(create_random_points(5),viewer,200,0,0);
   //draw::faisceau(viewer, 150, 0, 150);
-  // A patch
-  //draw::conic_tangents(viewer);
 
 
   // render

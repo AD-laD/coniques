@@ -7,7 +7,7 @@
 
 #include <C:\eigen-3.4.0\Eigen\Dense>
 
-//template <typename T> // T peut etre Point ou Droite
+
 class Conic {
     private :
         double m_a, m_b, m_c, m_d, m_e, m_f; //6 coefficients de la conique
@@ -27,9 +27,7 @@ class Conic {
         double get_coeff_from_i(const unsigned int i);
 
         Conic(std::vector<Point> point_vector); //5 points constructor
-        Conic(std::vector<double> vector);
-        Conic(std::vector<Droite> droite_vector);
-        //Conic(Conic C0); //copy constructor
+        Conic(std::vector<double> vector); //coefficient constructor
 
         //booléens types de conique
         bool is_cercle();
