@@ -29,6 +29,7 @@ class Conic {
         //getter
         double a(), b(), c(), d(), e(), f();
         std::vector<double> get_coeff();
+        double get_coeff_from_i(const unsigned int i);
 
         //conic type
         bool is_cercle();
@@ -39,5 +40,5 @@ class Conic {
         //operator
         Conic operator/(const double a);
         Conic operator*(const double a);
-        Conic operator+(Conic C);
+        Conic operator+(Conic &C);
 };

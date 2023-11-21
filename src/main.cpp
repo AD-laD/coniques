@@ -64,6 +64,19 @@ int main()
   draw::faisceau(viewer, 150, 0, 150);
   // A patch
   draw::conic_tangents(viewer);
+
+
+  //test d'une addition de coniques
+  // Conic A;
+  // std::vector<double> coeffA = {5.0,2.0, 3.0, 4.0, 5.0,6.0};
+  // A.set_vector(coeffA);
+  // A=A*2;
+  
+  // Conic B;
+  // std::vector<double> coeffB = {1.0,1.0, 1.0, 1.0, 1.0,1.0};
+  // B.set_vector(coeffB);
+  // Conic C = A+B;
+  // std::cout<<"LE A DE A VAUT "<<A.a()<<std::endl;
   
 
   // render

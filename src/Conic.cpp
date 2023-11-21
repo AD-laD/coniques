@@ -6,17 +6,19 @@
 
 //setter
 
-void Conic::set_value(unsigned int i, double& value){
+void Conic::set_value(unsigned int i, double& value){ //pas verif
     m_coeff[i] = value;
 }
 
 void Conic::set_vector(std::vector<double> &vect){
+    //pour les erreurs ; verif que vect a bien la meme taille que la conic
     m_coeff = vect;
 }
 
 void Conic::set_vector(Eigen::VectorXd &vect){
     for(int i=0;i<6;i++) m_coeff[i] = vect[i];
 }
+
 
 //getter
 double Conic::a(){return(m_coeff[0]);}
@@ -30,6 +32,10 @@ std::vector<double> Conic::get_coeff(){
     std::vector<double> coeff;
     coeff = m_coeff;
     return(coeff);
+}
+
+double Conic::get_coeff_from_i(const unsigned int i){
+    return m_coeff[i];
 }
 
 Conic::Conic(std::vector<Point> point_vector){
@@ -87,21 +93,35 @@ Conic::Conic() : m_coeff({0,0,0,0,0,0}){}
 
 Conic::Conic(std::vector<double> vector) : m_coeff(vector){}
 
-Conic Conic::operator/(const double a){
+Conic Conic::operator/(const double a){ //pas encore verif
+
+    //gestion des erreurs : verif que a n'est pas égal a 0 sinn arreter le programme
+    //static_assert ((a=0) && "erreur : on essaie de diviser une conique par 0");
     std::for_each(m_coeff.begin(),m_coeff.end(),[a](double x){x/a;});
     return(*this);
 }
 
-Conic Conic::operator*(const double a){
-    std::for_each(m_coeff.begin(),m_coeff.end(),[a](double x){x*a;});
-    return(*this);
+Conic Conic::operator*(const double a) { 
+    std::vector<double> resultCoeffs;
+    const std::vector<double>& coeffs = get_coeff();
+    for (size_t i = 0; i < 6; ++i) {
+        resultCoeffs.push_back(coeffs[i] * a);
+    }
+    Conic result;
+    result.set_vector(resultCoeffs);
+    return result;
 }
 
-Conic Conic::operator+(Conic C){
+Conic Conic::operator+(Conic& C){
+    std::vector<double> resultCoeffs;
+    const std::vector<double>& coeffs1 = get_coeff();
+    const std::vector<double>& coeffs2 = C.get_coeff();
     for(int i=0;i<6;i++){
-        this->get_coeff()[i] += C.get_coeff()[i];
+        resultCoeffs.push_back(coeffs1[i] + coeffs2[i]);
     }
-    return(*this);
+    Conic result;
+    result.set_vector(resultCoeffs);
+    return result;
 }
 
 std::vector<Point> moindres_carres(std::vector<Point> point_vector){
