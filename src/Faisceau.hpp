@@ -12,7 +12,7 @@ class Faisceau {
     private : 
         Conic m_Ca, m_Cb; // Coniques de base
         std::vector<Conic> m_Ci; // Coniques du faisceau
-        int m_num_conic=10; // le nombre de coniques du faisceau
+        int m_num_conic=20; // le nombre de coniques du faisceau
     public :
         Faisceau(Conic& Ca, Conic& Cb);
         ~Faisceau() = default;

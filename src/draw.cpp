@@ -17,7 +17,31 @@ void draw::conic_from_points(std::vector<Point> vector, Viewer_conic &viewer, co
         viewer.push_conic(conic1, r, g, b);
     }
     catch (std::runtime_error) {
-        // std::cout <<"Erreur lors du dessin de la conique dans le viewer"<<std::endl;
+        std::cerr << "erreur lors du dessin de la conique" << std::endl;
+    }
+}
+
+void draw::conic_from_coeff(std::vector<double> vector, const std::string type, Viewer_conic &viewer, const unsigned int r, const unsigned int g, const unsigned int b){
+    Conic conicFromCoeff;
+    conicFromCoeff.set_vector(vector);
+    Eigen::VectorXd eigenConic(6);
+    eigenConic << conicFromCoeff.a(), conicFromCoeff.b(), conicFromCoeff.c(), conicFromCoeff.d(), conicFromCoeff.e(), conicFromCoeff.f();
+
+    // verification du type
+    if(type =="cercle"){
+        assert (conicFromCoeff.is_cercle() && "erreur : la conique cercle ne vérifie pas l'équation");
+    } else if (type=="ellipse"){
+        assert (conicFromCoeff.is_ellipse() && "erreur : la conique ellipse ne vérifie pas l'équation");
+    } else if (type=="hyperbole"){
+        assert (conicFromCoeff.is_hyperbole() && "erreur : la conique hyperbole ne vérifie pas l'équation");
+    } else if (type=="parabole"){
+        assert (conicFromCoeff.is_parabole() && "erreur : la conique parabole ne vérifie pas l'équation");
+    }
+    //on push la conique
+    try{
+        viewer.push_conic(eigenConic, r, g, b);
+    }
+    catch (std::runtime_error) {
         std::cerr << "erreur lors du dessin de la conique" << std::endl;
     }
 }
@@ -34,12 +58,6 @@ void draw::set_w_to_conic(Viewer_conic &viewer, const double w){
     Point p1(5.0,5.0,w), p2(-3.0,2.0,w), p3(-4.0,-4.0,w), p4(1.0,-2.0,w), p5(0.0,1.0,w);
     std::vector<Point> v1{p1,p2,p3,p4,p5};
     draw::conic_from_points(v1,viewer,0,0,200);
-}
-
-void draw::random_points(Viewer_conic &viewer, const unsigned int n){ 
-    //conique de (n) points random
-    //en ROUGE
-    draw::conic_from_points(create_random_points(n),viewer,200,0,0);
 }
 
 std::vector<Point> draw::create_random_points(const unsigned int n){ 
@@ -60,74 +78,43 @@ std::vector<double> create_random_coeff(){
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     // selection du générateur random 
 	std::default_random_engine generator(seed);
-	std::uniform_real_distribution<double> uniformIntDistribution(0,10); //distribution d'int entre 0 et 10
+	std::uniform_real_distribution<double> uniformRealDistribution(-5,5); 
     std::vector<double> randomCoeff;
     for(unsigned int i=0; i <6 ; i++){
-        int val = uniformIntDistribution(generator);
-        std::cout<<static_cast<float>(val-5);
-        randomCoeff.push_back(static_cast<float>(val - 5)); //ajout de chaque coeff au vecteur (coeff egaux à 1.0, 2.0,.... <=5 et >=-5)
+        int val = uniformRealDistribution(generator);
+        randomCoeff.push_back(val); //ajout de chaque coeff au vecteur 
     }
     return randomCoeff;
 }
 
-//DRAW TYPES
-
 // void draw_types(Viewer_conic &viewer){
-    //créée des coniques à partir des coef
+
 void draw::circle_conic(Viewer_conic &viewer){
     //cercle : a = c et b=0
-    Conic cCercle;
     std::vector<double> vCercle = {1.0,0.0,1.0,5.0,3.0,2.0};
-    cCercle.set_vector(vCercle);
-    Eigen::VectorXd conicCercle(6);
-    conicCercle << cCercle.a(), cCercle.b(), cCercle.c(), cCercle.d(), cCercle.e(), cCercle.f();
-    // on la push
-    assert (cCercle.is_cercle() && "erreur : la conique cercle ne vérifie pas l'équation");
-
-    viewer.push_conic(conicCercle, 0, 200, 0);
+    std::string type="cercle";
+    draw::conic_from_coeff(vCercle, type, viewer, 0, 200, 0); //on créée la conique à partir de ses coeffs
 }
 
 void draw::ellipse_conic(Viewer_conic &viewer){
-
-    //ellipse
-    //b()*b()-4*a()*c()<0
-    Conic cEllipse;
+    //ellipse : b()*b()-4*a()*c()<0
     std::vector<double> vEllipse = {1.0, 3.0, 5.0, 5.0, 3.0, 2.0};
-    cEllipse.set_vector(vEllipse);
-    Eigen::VectorXd conicEllipse(6);
-    conicEllipse << cEllipse.a(), cEllipse.b(), cEllipse.c(), cEllipse.d(), cEllipse.e(), cEllipse.f();
-
-    assert (cEllipse.is_ellipse() && "erreur : la conique ellipse ne vérifie pas l'équation");
-    viewer.push_conic(conicEllipse, 0, 200, 0);
+    std::string type="ellipse";
+    draw::conic_from_coeff(vEllipse, type, viewer, 0, 200, 0);
 }
 
 void draw::parabole_conic(Viewer_conic &viewer){
-
-    //parabole
-    //b()*b()-4*a()*c()==0
-    Conic cParab;
+    //parabole : b()*b()-4*a()*c()==0
     std::vector<double> vParab = {1.0, 2.0, 1.0, 5.0, 3.0, 2.0};
-    cParab.set_vector(vParab);
-    Eigen::VectorXd conicParab(6);
-    conicParab << cParab.a(), cParab.b(), cParab.c(), cParab.d(), cParab.e(), cParab.f();
-
-    assert (cParab.is_parabole() && "erreur : la conique parabole ne vérifie pas l'équation");
-    viewer.push_conic(conicParab, 0, 200, 0);
+    std::string type="parabole";
+    draw::conic_from_coeff(vParab, type, viewer, 0, 200, 0);
 }
 
 void draw::hyperbole_conic(Viewer_conic &viewer){
-
-    //hyperbole
-    //b()*b()-4*a()*c()>0
-    Conic cHyper;
-    std::vector<double> vHyper = {2.0, 3.0, 1.0, 5.0, 3.0, 2.0};
-    cHyper.set_vector(vHyper);
-    Eigen::VectorXd conicHyper(6);
-    conicHyper << cHyper.a(), cHyper.b(), cHyper.c(), cHyper.d(), cHyper.e(), cHyper.f();
-
-    assert (cHyper.is_hyperbole() && "erreur : la conique hyperbole ne vérifie pas l'équation");
-
-    viewer.push_conic(conicHyper, 0, 200, 0);
+    //hyperbole : b()*b()-4*a()*c()>0
+    std::vector<double> vHyper = {5.0, 3.0, 0.0, 1.0, -1.0, -2.0};
+    std::string type = "hyperbole";
+    draw::conic_from_coeff(vHyper, type, viewer, 0, 200, 0);
 
 }
 
@@ -135,13 +122,14 @@ void draw::faisceau(Viewer_conic &viewer, const unsigned int r, const unsigned i
 
     // faisceau basique
     // on contruit nos 2 coniques de base
-    // std::vector<double> va{1.0, 3.0, 5.0, 5.0, 3.0, 2.0};
-    // std::vector<double> vb{1.0, -3.0, 3.0, 5.0, -2.0, 1.0};
+    std::vector<double> va{1.0, 3.0, 5.0, 5.0, 3.0, 2.0};
+    std::vector<double> vb{1.0, -3.0, 3.0, 5.0, -2.0, 1.0};
 
-    std::vector<double> va = create_random_coeff();
-    std::vector<double> vb = create_random_coeff();
+    // std::vector<double> va = create_random_coeff();
+    // std::vector<double> vb = create_random_coeff();
     Conic Ca(va);
     Conic Cb(vb);
+    std::string type = "";
     // on construit le faisceau
     Faisceau F(Ca, Cb);
 
@@ -159,6 +147,8 @@ void draw::faisceau(Viewer_conic &viewer, const unsigned int r, const unsigned i
             std::cerr << "erreur lors du dessin de la conique" << std::endl;
         }
     }
+    draw::conic_from_coeff(va, type, viewer, 0,200,0); //Pour rendre Ca et Cb bien visibles
+    draw::conic_from_coeff(vb, type, viewer, 0,200,0);
 }
 
 void draw::conic_from_tangents(std::vector<Droite> vector, Viewer_conic &viewer, const unsigned int r, const unsigned int g, const unsigned int b){

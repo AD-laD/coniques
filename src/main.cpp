@@ -44,26 +44,17 @@ int main()
   // draw::set_w_to_conic(viewer, 2); //on peut choisir la valeur de la coordonnée homogène des points
   // draw::set_w_to_conic(viewer, 3);
   // draw::set_w_to_conic(viewer, 4);
-  draw::random_points(viewer, 10);
+  // draw::random_points(viewer, 10);
+  //draw::conic_from_points(draw::create_random_points(5),viewer,200,0,0);
   // draw::circle_conic(viewer);
   // draw::ellipse_conic(viewer);
   // draw::parabole_conic(viewer);
   // draw::hyperbole_conic(viewer);
 
-  // A TEST
   draw::faisceau(viewer, 150, 0, 150);
   // A patch
-  draw::conic_tangents(viewer);
+  //draw::conic_tangents(viewer);
 
-
-  //test d'une addition de coniques
-  // Conic A;
-  // std::vector<double> coeffA = {5.0,2.0, 3.0, 4.0, 5.0,6.0};
-  // A.set_vector(coeffA);
-  // Conic B;
-  // std::vector<double> coeffB = {1.0,1.0, 1.0, 1.0, 1.0,1.0};
-  // B.set_vector(coeffB);
-  // Conic C = A+B;  
 
   // render
   viewer.display(); // on terminal

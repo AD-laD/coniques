@@ -12,7 +12,7 @@ Faisceau::Faisceau(Conic& Ca, Conic& Cb){
     std::for_each(coeff_b.begin(), coeff_b.end(), [&sum_b](double x){sum_b+=x*x;});
 
     Conic newCa=Ca/std::sqrt(sum_a);
-    Conic newCb = Cb/std::sqrt(sum_b);
+    Conic newCb =Cb/std::sqrt(sum_b);
 
     if(std::sqrt(sum_a)!=1){set_Ca(newCa);}
     if(std::sqrt(sum_b)!=1){set_Cb(newCb);}
