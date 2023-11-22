@@ -1,83 +1,73 @@
 #include "Conic.hpp"
 
 //default constructor
-Conic::Conic() : m_coeff({0,0,0,0,0,0}){}
+Conic::Conic() : m_coeff({0,0,0,0,0,0}){} //par défaut, les coeff sont égaux à 0
 
 //setters
 
-void Conic::set_value(unsigned int i, double& value){ //pas verif
-    m_coeff[i] = value;
-}
-
-void Conic::set_vector(std::vector<double> &vect){
+void Conic::set_vector(const std::vector<double> &vect){ //permet de set un vector de double de coeff à une conique
+    assert ((vect.size()==6) && "erreur : le vecteur de coeff ne contient pas 6 valeurs");
     //pour les erreurs ; verif que vect a bien la meme taille que la conic
     m_coeff = vect;
 }
 
-void Conic::set_vector(Eigen::VectorXd &vect){
-    for(int i=0;i<6;i++) m_coeff[i] = vect[i];
-}
 
+//getters : ils retournent les valeurs des coeffs
+double Conic::a()const{return(m_coeff[0]);}
+double Conic::b()const{return(m_coeff[1]);}
+double Conic::c()const{return(m_coeff[2]);}
+double Conic::d()const{return(m_coeff[3]);}
+double Conic::e()const{return(m_coeff[4]);}
+double Conic::f()const{return(m_coeff[5]);}
 
-//getters
-double Conic::a(){return(m_coeff[0]);}
-double Conic::b(){return(m_coeff[1]);}
-double Conic::c(){return(m_coeff[2]);}
-double Conic::d(){return(m_coeff[3]);}
-double Conic::e(){return(m_coeff[4]);}
-double Conic::f(){return(m_coeff[5]);}
-
-
-std::vector<double> Conic::get_coeff(){
+//getter : permet de get tout le vecteur de coeff de la conique
+std::vector<double> Conic::get_coeff() const{
     std::vector<double> coeff;
     coeff = m_coeff;
     return(coeff);
 }
 
-double Conic::get_coeff_from_i(const unsigned int i){
+//permet de get un coeff au rang i
+double Conic::get_coeff_from_i(const unsigned int i) const{
     return m_coeff[i];
 }
 
-Conic::Conic(std::vector<Point> point_vector){
-
+Conic::Conic(const std::vector<Point> point_vector){ //connstructeur de conique à partir d'un vector de Points
     int n = point_vector.size();
     assert ((n>=5) && "erreur : il faut au moins 5 points de controle pour construire la conique");
-    //verifie à l'exécution qu'il y a bien au moins 5 points de controles
+    //verifie à l'exécution qu'il y a bien au moins 5 points de controle
 
-    //if(n>5){this->set_vector(moindres_carres(point_vector))}
-    Eigen::MatrixXd A(n,6);
+    Eigen::MatrixXd A(n,6); //création de matrice de taille n par 6
 
-    for(int i=0;i<n;i++){
-        A(i,0) = point_vector[i].x()*point_vector[i].x();
-        A(i,1) = point_vector[i].x()*point_vector[i].y();
-        A(i,2) = point_vector[i].y()*point_vector[i].y();
-        A(i,3) = point_vector[i].x()*point_vector[i].w();
-        A(i,4) = point_vector[i].y()*point_vector[i].w();
-        A(i,5) = point_vector[i].w()*point_vector[i].w();
+    for(int i=0;i<n;i++){ 
+        //pour chaque colonne, on fait :
+        A(i,0) = point_vector[i].x()*point_vector[i].x();//xi au carré sur la première ligne
+        A(i,1) = point_vector[i].x()*point_vector[i].y();//xi*yi sur la deuxième ligne
+        A(i,2) = point_vector[i].y()*point_vector[i].y();//yi au carré
+        A(i,3) = point_vector[i].x()*point_vector[i].w();//xi*wi
+        A(i,4) = point_vector[i].y()*point_vector[i].w();//yi*wi
+        A(i,5) = point_vector[i].w()*point_vector[i].w();//wi au carré
     }
+    //noyau de A
     Eigen::JacobiSVD<Eigen::MatrixXd> svd(A, Eigen::ComputeThinU|Eigen::ComputeFullV);
     Eigen::VectorXd x=svd.matrixV().rightCols(1);
     std::vector<double> coefficients;
     for (int i = 0; i < x.size(); ++i) {
-        coefficients.push_back(x(i));
+        coefficients.push_back(x(i));//on met les valeurs de xi dans le vecteur coefficient
     }
-    set_vector(coefficients);
+    set_vector(coefficients);//on set ce vecteur de coefficients à la conique
 }
 
-Conic::Conic(std::vector<double> vector) : m_coeff(vector){}
-
+Conic::Conic(const std::vector<double> vector) : m_coeff(vector){}//constructeur à partir d'un vecteur de coefficients
 
 //opérateurs
 
-Conic Conic::operator/(const double a){
-
-    //gestion des erreurs : verif que a n'est pas égal a 0 sinn arreter le programme
-    //static_assert ((a=0) && "erreur : on essaie de diviser une conique par 0");
+Conic Conic::operator/(const double a) const{ //division d'une conique par un double
     std::for_each(m_coeff.begin(),m_coeff.end(),[a](double x){x/a;});
     return(*this);
 }
 
-Conic Conic::operator*(const double a) { 
+Conic Conic::operator*(const double a) const{ //multiplication d'une conique par un double
     std::vector<double> resultCoeffs;
     const std::vector<double>& coeffs = get_coeff();
     for (size_t i = 0; i < 6; ++i) {
@@ -88,7 +78,7 @@ Conic Conic::operator*(const double a) {
     return result;
 }
 
-Conic Conic::operator+(Conic& C){
+Conic Conic::operator+(const Conic& C) const{ //addition de 2 coniques
     std::vector<double> resultCoeffs;
     const std::vector<double>& coeffs1 = get_coeff();
     const std::vector<double>& coeffs2 = C.get_coeff();
@@ -100,9 +90,6 @@ Conic Conic::operator+(Conic& C){
     return result;
 }
 
-std::vector<Point> moindres_carres(std::vector<Point> point_vector){
-
-}
 
 // types de conique 
 bool Conic::is_cercle(){return(a()==c() && b()==0);}

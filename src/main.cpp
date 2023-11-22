@@ -2,10 +2,10 @@
 #include <vector>
 
 // #include <Eigen/Dense>
-#include <C:\eigen-3.4.0\Eigen\Dense>
+// #include <C:\eigen-3.4.0\Eigen\Dense>
 #include "Geogebra_conics.hpp"
-#include "Point.hpp"
-#include "draw.hpp"
+// #include "Point.hpp"
+// #include "draw.hpp"
 #include "ConicTypes.hpp"
 
 
@@ -22,37 +22,22 @@ int main()
   viewer.show_value(false);
   viewer.show_label(true);
 
-  // draw points
-  /*Eigen::VectorXd pt1(2), pt2(2), pt3(2);
-  pt1 <<  1.5,  2.0;
-  pt2 <<  3.0,  1.0;
-  pt3 << -5.0, -1.0;
-
-  viewer.push_point(pt1, "p1", 200,0,0);
-  viewer.push_point(pt2, "p2", 200,0,0);
-  viewer.push_point(pt3, 200,0,0);*/
-
-  // draw line
-  // viewer.push_line(pt1, pt2-pt1,  200,200,0);
-
-  // draw conic
-  // Eigen::VectorXd conic(6);
-  // conic << -1.4, -0.3, -1, -0.6, 0.0, 0.8;
-  // viewer.push_conic(conic, 0,0,200);  
-
   //Types de coniques
-  set_w_to_conic(viewer,1);
-  set_w_to_conic(viewer, 2); //on peut choisir la valeur de la coordonnée homogène des points
+
+  set_w_to_conic(viewer, 1); //prend en attribut la viewer et la valeur de la coordonnée homgène des points de la conique
+  set_w_to_conic(viewer, 2);
   set_w_to_conic(viewer, 3);
   set_w_to_conic(viewer, 4);
-  circle_conic(viewer);
-  ellipse_conic(viewer);
-  parabole_conic(viewer);
-  hyperbole_conic(viewer);
 
-  //Fonctions plus complexes
-  //draw::conic_from_points(create_random_points(5),viewer,200,0,0);
-  //draw::faisceau(viewer, 150, 0, 150);
+  // circle_conic(viewer); //créée et affiche une conique circulaire
+  // ellipse_conic(viewer); //créée et affiche une conique elliptique
+  // parabole_conic(viewer); //créée et affiche une conique parabolique
+  // hyperbole_conic(viewer); //crée et affiche une conique hyperbolique
+
+  // //Fonctions plus complexes
+  // int nb_points =5;
+  // draw::conic_from_points(create_random_points(nb_points),viewer,200,0,0); //créée et affiche une conique issue de n points à coordonnées random
+  // draw::faisceau(viewer, 150, 0, 150); //créée et dessine un faisceau de coniques
 
 
   // render

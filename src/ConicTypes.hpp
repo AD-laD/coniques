@@ -1,3 +1,4 @@
+#pragma once
 #include "draw.hpp"
 
 void set_w_to_conic(Viewer_conic &viewer, const double w);

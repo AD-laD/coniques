@@ -3,10 +3,10 @@
 #include <vector>
 #include <algorithm>
 #include "Point.hpp"
-#include "Droite.hpp"
 
 #include <C:\eigen-3.4.0\Eigen\Dense>
 
+// #include <Eigen/Dense> //pour MACOS
 
 class Conic {
     private :
@@ -15,19 +15,17 @@ class Conic {
 
     public : 
         Conic(); // default constructor
-        ~Conic() = default;
+        ~Conic() = default; //desteucteur
         //setters
-        void set_value(unsigned int i, double& value);
-        void set_vector(std::vector<double> &vect);
-        void set_vector(Eigen::VectorXd &vect);
+        void set_vector(const std::vector<double> &vect);
 
-        //getters
-        double a(), b(), c(), d(), e(), f();
-        std::vector<double> get_coeff();
-        double get_coeff_from_i(const unsigned int i);
+        //getters : retournent les valeurs de chaque coeff
+        double a() const, b() const, c() const, d() const, e() const, f() const;
+        std::vector<double> get_coeff() const; //retourne le vecteur de coeff
+        double get_coeff_from_i(const unsigned int i) const; //retourne la ieme valeur du vecteur de coeff
 
-        Conic(std::vector<Point> point_vector); //5 points constructor
-        Conic(std::vector<double> vector); //coefficient constructor
+        Conic(const std::vector<Point> point_vector); //5 points constructor
+        Conic(const std::vector<double> vector); //coefficient constructor
 
         //booléens types de conique
         bool is_cercle();
@@ -36,7 +34,7 @@ class Conic {
         bool is_hyperbole();
 
         //opérateurs
-        Conic operator/(const double a);
-        Conic operator*(const double a);
-        Conic operator+(Conic &C);
+        Conic operator/(const double a) const;
+        Conic operator*(const double a) const;
+        Conic operator+(const Conic &C) const;
 };

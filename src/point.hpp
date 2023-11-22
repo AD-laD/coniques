@@ -3,6 +3,7 @@
 #include <vector>
 
 #include <C:\eigen-3.4.0\Eigen\Dense>
+// #include <Eigen/Dense>//pour MACOS
 
 class Point {
 
@@ -16,16 +17,13 @@ class Point {
 
         ~Point() = default; //destructor
 
-        Point prod_vect(const Point& b); // produit vectoriel
-
-        //getters
-        double x();
-        double y();
-        double w();
+        //getters : on récupère les valeurs de x, y, w
+        double x() const;
+        double y() const;
+        double w() const;
         
-        //setters
-        void set_x(double& x);
-        void set_y(double& y);
-        void set_w(double& w);
-
+        //setters : on peut modifier les valeurs de x, y, w
+        void set_x(const double& x);
+        void set_y(const double& y);
+        void set_w(const double& w);
 };
