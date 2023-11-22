@@ -14,6 +14,7 @@ Faisceau::Faisceau(Conic& Ca, Conic& Cb){
     Conic newCa=Ca/std::sqrt(sum_a);
     Conic newCb =Cb/std::sqrt(sum_b);
 
+// a supp
     if(std::sqrt(sum_a)!=1){set_Ca(newCa);}
     if(std::sqrt(sum_b)!=1){set_Cb(newCb);}
 
@@ -21,6 +22,7 @@ Faisceau::Faisceau(Conic& Ca, Conic& Cb){
     // avec t = pi/i, i dans [0,pi]
     // Conic C1;
     // Conic C2;
+    // mettre new ca et new cb a la place de ca et cb
     m_Ci.resize(m_num_conic);
     for(int i=0;i<m_num_conic;i++){
         double t = 3.141592/m_num_conic*i; 
