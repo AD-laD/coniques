@@ -63,7 +63,7 @@ Conic::Conic(const std::vector<double> vector) : m_coeff(vector){}//constructeur
 //opérateurs
 
 Conic Conic::operator/(const double a) const{ //division d'une conique par un double
-    std::for_each(m_coeff.begin(),m_coeff.end(),[a](double x){x/a;});
+    std::for_each(m_coeff.begin(),m_coeff.end(),[a](double x){x=x/a;});
     return(*this);
 }
 
