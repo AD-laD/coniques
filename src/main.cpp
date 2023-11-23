@@ -24,20 +24,21 @@ int main()
 
   //Types de coniques
 
-  set_w_to_conic(viewer, 1); //prend en attribut la viewer et la valeur de la coordonnée homgène des points de la conique
-  set_w_to_conic(viewer, 2);
-  set_w_to_conic(viewer, 3);
-  set_w_to_conic(viewer, 4);
+  // set_w_to_conic(viewer, 1); //prend en attribut la viewer et la valeur de la coordonnée homgène des points de la conique
+  // set_w_to_conic(viewer, 2);
+  // set_w_to_conic(viewer, 3);
+  // set_w_to_conic(viewer, 4);
 
   // circle_conic(viewer); //créée et affiche une conique circulaire
   // ellipse_conic(viewer); //créée et affiche une conique elliptique
   // parabole_conic(viewer); //créée et affiche une conique parabolique
   // hyperbole_conic(viewer); //crée et affiche une conique hyperbolique
 
-  // //Fonctions plus complexes
-  // int nb_points =5;
+  //Fonctions plus complexes
+
+  // int nb_points =5; //on peut choisir le nb de points de controle
   // draw::conic_from_points(create_random_points(nb_points),viewer,200,0,0); //créée et affiche une conique issue de n points à coordonnées random
-  // draw::faisceau(viewer, 150, 0, 150); //créée et dessine un faisceau de coniques
+  draw::faisceau(viewer, 150, 0, 150); //créée et dessine un faisceau de coniques
 
 
   // render
